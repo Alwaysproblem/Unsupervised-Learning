@@ -21,7 +21,20 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+e = @(a,b) (a-b).^2; 
 
+
+for i =  1:length(X)
+    % the first method that I thought to compute the Euler distance. 
+    %    mat_x =  repmat(X(i,:), K, 1);
+    %    f = (mat_x - centroids).^2;
+    %    euler = sum(f, 2);
+    % but I use the suggestion from the tutor to compute the distance
+    % faster than the first thought.
+   tmp = bsxfun(e, X(i,:), centroids);
+   euler = sum(tmp, 2);
+   [~,idx(i)] = min(euler); 
+end
 
 
 
